@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rendering server side of svg, pulled from a queue</title>
+    <style>
+
+         
+    </style>
+</head>
+<body>
+    <h2>Rendering server side of svg, pulled from a queue</h2>
+    <div style="margin: 50px 50px 50px 50px;">
+        <div id="test">
+            
+        </div>
+        <img id="img1"/>
+    </div>
+
+<script src="public/jquery-2.1.4.min.js"></script>
+<script>
+    
+    $( document ).ready(function() {
+        $("#btnReq").click(function(){
+            console.log("[req] start " + $("#reportname").val());
+            $.ajax({
+                type: 'GET',
+                url: 'http://localhost:3000/addjob?dt=' + (new Date()).getTime() + '&name=' + $("#reportname").val(),
+                
+                dataType: 'html',
+                success: function (data) {
+                    console.log("[req] adding to div");
+                    $('#test').append(data + "<br/>");
+                
+                }            
+           }).fail(function(jqXHR, textStatus ) {
+                alert( "[req] Request failed: " + textStatus );
+           }).done( function (data) {
+                console.log("[req] done");            
+            });
+        });
+        
+        $("#btn").click(function(){
+            console.log("[add] get start "  + $("#reportname").val());
+            $.ajax({
+                type: 'GET',
+                url: 'http://localhost:3000/getjob?reportname=' + $("#reportname").val(),                        
+                dataType: 'html',
+                success: function (data) {
+                    console.log("[add] adding to div");
+                    $('#test').append(data + "<br/>");
+                }            
+           }).error(function(jqXHR, textStatus, errorThrown ) {
+                $('#test').append( "[add] Request failed: " + textStatus + ", reason:" + errorThrown + ", " + jqXHR.responseText + "<br/>");
+           }).done( function (data) {
+                console.log("[add] done");            
+            });
+        });
+    });
+     
+     
+</script>
+<div>
+    <div>
+        <input type="button" id="btnReq" name="btnReq" value="request report"  >
+    </div>
+    <br/>
+    <div>
+    <input type="button" id="btn" name="btn" value="fetch report"  >
+    <br/>
+    Report name
+    <input type="text" id="reportname" name="reportname" value="test43535">
+    </div>
+</div>
+</body>
+</html>

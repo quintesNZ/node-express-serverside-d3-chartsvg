@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rendering server side of svg</title>
+    <style>
+
+         
+    </style>
+</head>
+<body>
+    <h2>Rendering server side of svg</h2>
+    <div style="margin: 50px 50px 50px 50px;">
+        <div id="test">
+            
+        </div>
+        <img id="img1"/>
+    </div>
+
+<script src="public/jquery-2.1.4.min.js"></script>
+<script>
+    
+
+    $( document ).ready(function() {
+        $("#btn").click(function(){
+            console.log("start");
+            $.ajax({
+                type: 'GET',
+                url: 'http://localhost:3000/d3?dt=' + (new Date()).getTime() + "&name=anything", 
+                dataType: 'html',
+                success: function (data) {
+                    console.log("adding to div");
+                    $('#test').append(data);
+                    //console.log("adding to img src");
+                    //$("#img1").attr("src", "data:image/svg+xml;charset=UTF-8," + data);
+                }            
+           }).fail(function(jqXHR, textStatus ) {
+                alert( "Request failed: " + textStatus );
+           }).done( function (data) {
+                console.log("done");            
+            });
+        });
+    });
+
+</script>
+<div>
+	<input type="button" id="btn" name="btn" value="run"  >
+</div>
+</body>
+</html>
