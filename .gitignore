@@ -78,3 +78,8 @@ typings/
 
 # DynamoDB Local files
 .dynamodb/
+=======
+
+# next.js build output
+.next
+>>>>>>> 33e7426f45877aaf9d12c9bc8f7ff030e8796096
