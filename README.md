@@ -55,6 +55,5 @@ Quintes van Aswegen, Solution Architect, Ministry of Education New Zealand.
 ## License
 
 This project is licensed under the terms of the MIT license.
-=======
-# node-express-serverside-d3-chartsvg
->>>>>>> 33e7426f45877aaf9d12c9bc8f7ff030e8796096
+
+
